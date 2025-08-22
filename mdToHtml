@@ -1,0 +1,12 @@
+import re
+with open("links.txt", 'w') as wf:
+  with open("mds.txt", 'r+') as f:
+    line = f.readline()
+    while line:
+      print(line)
+      mre = re.compile("\[(.*?)]\((http://.*?)\)")
+      url = mre.match(line).group(2)
+      domain = mre.match(line).group(1)
+      wf.write(f"\n<a href={url}>{domain}</a>")
+      line = f.readline()
+      
