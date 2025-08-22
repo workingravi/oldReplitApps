@@ -1,0 +1,23 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+import re
+with open("test.txt") as f:
+
+  n = int(f.readline())
+  sents = []
+  for i in range(n):
+      sents.append(f.readline().rstrip())
+  
+  t = int(f.readline())
+  for i in range(t):
+      word = f.readline().rstrip()
+      # word is what we look for... so find 'our' in word
+      oi = word.find('our')
+      
+      usword = word[:oi] + 'or' + word[oi+3:]
+      # find occurences of word and usword in each of the sents
+      
+      nw, nusw = 0, 0
+      for sent in sents:
+          nw += len(re.findall(rf'\b{word}\b', sent))
+          nusw += len(re.findall(rf'\b{usword}\b', sent))
+      print(nw + nusw)
